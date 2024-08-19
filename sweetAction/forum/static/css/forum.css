@@ -1,0 +1,34 @@
+body {
+    font-family: sans-serif;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navbar {
+    padding: 0px;
+}
+
+#header {
+    background-color: aqua;
+}
+
+#navigation {
+    background-color: aquamarine;
+}
+
+#footer{
+    background-color: aliceblue;
+}
+
+#title_section {
+    display: inline;
+}
+
+.content {
+    padding-left: 10px;
+}
