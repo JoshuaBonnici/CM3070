@@ -39,13 +39,13 @@ a {
     padding: 20px;
 }
 
-.boards-full {
+.boards-table {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
 }
 
-.board {
+.board-group {
     background-color: #fff;
     border: 1px solid #b9b9b9;
     border-radius: 5px;
@@ -54,4 +54,28 @@ a {
     align-items: center;
 }
 
+.board {
+    margin-bottom: 5px;
+}
 
+.board-description {
+    margin: 5px;
+    color: #6e6e6e;
+    padding-right: 20px;
+}
+
+.board-data {
+    flex: 1;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    padding: 10px;
+    text-align: center;
+    background-color: lightblue
+}
+
+.board-last {
+    flex: 2;
+    text-align: right;
+    padding-left: 20px;
+    padding-right: 10px;
+}
