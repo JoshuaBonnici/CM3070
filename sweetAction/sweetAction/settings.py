@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'taggit',
+    'hitcount',
+    'tinymce',
     'rest_framework',
     'bootstrap4',
     'forum.apps.ForumConfig',

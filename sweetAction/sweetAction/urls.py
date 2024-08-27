@@ -20,4 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('forum.urls')),
     path('admin/', admin.site.urls),
+    # include the tinymce app for rich text editing
+    path('tinymce/', include('tinymce.urls')),
+    # include the hitcount app for tracking views on posts/threads
+    path('hitcount/', include('hitcount.urls', namespace='hitcount')),
+
 ]
