@@ -9,25 +9,25 @@ from taggit.managers import TaggableManager
 from django.utils.text import slugify
 
 
-class Author(models.Model):
-    fullname = models.CharField(max_length=40, blank=True)
-    avatar = models.ImageField(upload_to='avatarimages/', max_length=100)
-    bio = HTMLField()
-    rizz = models.IntegerField(default=0)
-    slug = models.SlugField(max_length=400, unique=True, blank=True)
-# configure delete
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super(Author, self).save(*args, **kwargs)
+class Board(models.Model):
+    name = models.CharField(max_length=400)
+    description = models.TextField()
 
     def __str__(self):
-        return self.fullname
+        return self.name
+
+class Topic(models.Model):
+    name = models.CharField(max_length=400)
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='topics', default=1)
+    
+    def __str__(self):
+        return self.name
 
 
-class Thread(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=400)
+    # set and enforce one-to-one post to topic relationship using a foreign key
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='posts', default=1)
     content = HTMLField()
     categories = models.ManyToManyField('Category')
     date = models.DateTimeField(auto_now_add=True)
@@ -42,10 +42,26 @@ class Thread(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        super(Thread, self).save(*args, **kwargs)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+class User(models.Model):
+    fullname = models.CharField(max_length=40, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='users', default=1)
+    avatar = models.ImageField(upload_to='avatarimages/', max_length=100, blank=True, null=True)
+    bio = HTMLField()
+    rizz = models.IntegerField(default=0)
+    slug = models.SlugField(max_length=400, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(User, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.fullname
 
 
 class Category(models.Model):

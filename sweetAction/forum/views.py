@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import *
 
@@ -7,7 +7,11 @@ def index(request):
     return render(request, 'forum/index.html')
 
 def general(request):
-    return render(request, 'forum/general.html')
+    topics = Topics.objects.all()
+    context = {
+        "topics": topics
+    }
+    return render(request, 'forum/general.html', context)
 
 def user_login(request):
     return render(request, 'forum/login.html')
